@@ -1,0 +1,34 @@
+# command to edit deploy
+kubectl edit deploy mydep
+
+#command to describe deploy
+kubectl describe deploy mydep
+
+#command to keep watch on any object
+kubectl get pods --watch 
+or
+kubectl get pods -w
+
+# command to scale
+kubectl scale deploy mydep --replicas=3
+
+#how to expose a deployment
+kubectl expose deploy mydep --type=ClusterIP --port=80
+
+#how to update image
+kubectl set image deploy mydep nginx=vijaytrainer/myapache:1.0
+
+#how to see the rollout status
+kubectl rollout status deploy mydep
+
+#how to see the history of rollouts
+kubectl rollout history deploy mydep
+
+#how to undo rollout
+kubectl rollout undo deploy mydep
+
+#how to undo rollout to a specific revision
+kubectl rollout undo deploy mydep --to-revision=<revision number>
+
+
+kubernetes.io/change-cause: kubectl set image deploy mydep nginx=vijaytrainer/myapache:1.0 --record

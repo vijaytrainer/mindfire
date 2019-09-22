@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-dep
+  annotations:
+    description: "this is the first deployment"
+  labels:
+    app: nginx
+    tier: frontend    
+spec:
+  replicas: 2
+  selector:
+   matchLabels:
+    app: nginx
+    tier: frontend
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - name: nginxport
+          containerPort: 80
+          
