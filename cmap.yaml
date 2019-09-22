@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: weathervariable
+  namespace: default
+data:
+  weather: summer
+  today: hot
+  tomorrow: mild

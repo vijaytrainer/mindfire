@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy1
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: Cmdeploy
+    spec:
+      containers:
+      - name: containercm1
+        image: nginx
+        ports:
+        - containerPort: 80
+        env:
+        - name: weatherseasons
+          valueFrom:
+            configMapKeyRef:
+              name: weathervariable 
+              key: weather
+        - name: weathertoday
+          valueFrom:
+            configMapKeyRef:
+              name: weathervariable
+              key: today
