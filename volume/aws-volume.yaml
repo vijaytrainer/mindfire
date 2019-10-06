@@ -1,0 +1,24 @@
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  name: "demo1"
+  labels:
+    name: "myapp1"
+spec:
+  containers:
+    -
+      name: "myapp1"
+      image: vijaytrainer/myapache:1.0
+      ports:
+        -
+          containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        -
+          mountPath: "/var/www/html"
+          name: "test-volume"
+  volumes:
+    - name: "test-volume"
+      awsElasticBlockStore:
+        fsType: "ext4" 
+        volumeID: "vol-078f399d7bb23aa3d"

@@ -1,0 +1,24 @@
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  name: "demo"
+  labels:
+    name: "myapp"
+spec:
+  containers:
+    -
+      name: "myapp"
+      image: vijaytrainer/myapache:1.0
+      ports:
+        -
+          containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        -
+          mountPath: "/var/www/html"
+          name: "pv0001"
+  volumes:
+    -
+      name: "pv0001"
+      persistentVolumeClaim:
+        claimName: "claim1"
