@@ -1,0 +1,5 @@
+FROM java:alpine
+VOLUME /tmp
+ADD target/dockerised-java-0.0.1-SNAPSHOT.jar dockerised-java-0.0.1-SNAPSHOT.jar
+EXPOSE 80
+ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","dockerised-java-0.0.1-SNAPSHOT.jar"]
