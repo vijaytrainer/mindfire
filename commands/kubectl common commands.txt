@@ -1,0 +1,45 @@
+#Creating Objects
+
+$ kubectl create -f ./my-manifest.yaml           # create resource(s)
+$ kubectl create -f ./my1.yaml -f ./my2.yaml     # create from multiple files
+$ kubectl create -f ./dir                        # create resource(s) in all manifest files in dir
+$ kubectl create -f https://git.io/vPieo         # create resource(s) from url
+$ kubectl run nginx --image=nginx                # start a single instance of nginx
+$ kubectl explain pods,svc                       # get the documentation for pod and svc manifests
+
+#Viewing, Finding Resources
+
+$ kubectl get services                          # List all services in the namespace
+$ kubectl get pods --all-namespaces             # List all pods in all namespaces
+$ kubectl get pods -o wide                      # List all pods in the namespace, with more details
+$ kubectl get deployment my-dep                 # List a particular deployment
+
+
+# Describe commands with verbose output
+$ kubectl describe nodes my-node
+$ kubectl describe pods my-pod
+
+#Editing Resources
+$ kubectl edit deployment my-dep
+
+#Deleting Resources
+$ kubectl delete -f ./pod.json                      # Delete a pod using the type and name specified in pod.json
+$ kubectl delete pod,service baz foo                # Delete pods and services with same names "baz" and "foo"
+$ kubectl delete pods,services -l name=myLabel      # Delete pods and services with label name=myLabel
+$ kubectl -n my-ns delete po,svc --all              # Delete all pods and services in namespace my-ns
+
+#Interacting with running Pods
+$ kubectl logs my-pod                                 # dump pod logs (stdout)
+$ kubectl logs my-pod -c my-container                 # dump pod container logs (stdout, multi-container case)
+$ kubectl logs -f my-pod                              # stream pod logs (stdout)
+$ kubectl logs -f my-pod -c my-container              # stream pod container logs (stdout, multi-container case)
+$ kubectl run -i --tty busybox --image=busybox -- sh  # Run pod as interactive shell
+$ kubectl attach my-pod -i                            # Attach to Running Container
+$ kubectl port-forward my-pod 5000:6000               # Forward port 6000 of Pod to your to 5000 on your local machine
+$ kubectl exec my-pod -- ls /                         # Run command in existing pod (1 container case)
+$ kubectl exec my-pod -c my-container -- ls /         # Run command in existing pod (multi-container case)
+$ kubectl top pod POD_NAME --containers               # Show metrics for a given pod and its containers
+
+
+
+

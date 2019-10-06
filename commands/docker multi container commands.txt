@@ -1,0 +1,41 @@
+git clone https://github.com/vijaytrainer/foodtrucks.git
+
+docker search elasticsearch
+
+docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+
+docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+
+docker container ls
+
+docker container logs es
+
+curl 0.0.0.0:9200
+
+docker build -t vijaytrainer/foodtrucks .
+
+docker container run -P --rm --net foodtruck-net vijaytrainer/foodtrucks
+
+docker container ls
+
+docker network ls
+
+docker network inspect bridge
+
+docker run -it vijaytrainer/foodtrucks bash
+
+curl containerip:9200
+
+
+let's create the network
+
+docker network create foodtruck-net
+
+docker container rm es
+
+docker run -d --name es --net foodtrucks-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+
+
+docker run -it --rm --net foodtrucks-net vijaytrainer/foodtrucks-web bash
+
+docker run -d --net foodtrucks-net -p 5000:5000 --name foodtrucks-web vijaytrainer/foodtrucks-web
