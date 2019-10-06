@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy2
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: Cmdeploy
+    spec:
+      containers:
+      - name: container1
+        image: nginx
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: weathervariable
